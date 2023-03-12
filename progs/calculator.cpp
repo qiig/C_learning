@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
+// 简易计算器，以整行字符串形式输入
 class Calculator
 {
 private:

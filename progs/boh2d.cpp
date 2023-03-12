@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
-
+// 进制转换
 using namespace std;
 
 void getNum(char* arr, int len, int O);

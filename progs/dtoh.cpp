@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+// 整数转16进制
 string toHexString(int n);
 string h = "0123456789ABCDEF";
 
