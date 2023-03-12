@@ -1,23 +1,17 @@
-#include<iostream>
-
-using namespace std;
-
-int main() {
+#include <stdio.h>
+  
+int main(void){
     int n;
-    while (cin >> n)
-    {
-        if (n == 0) {
-            break;
+    while(scanf("%d", &n) == 1){
+        int tmp = n;
+        for(int i = 2; i * i <= tmp && n >= i; i++){
+            while(n % i == 0){
+                printf("%d ", i);
+                n /= i;
+            }
         }
-        int* p = new int;
-        for (int i = 0; i < n; i++) {
-            cin >> p[i];
-        }
-        cout <<"sizeof --- "<< sizeof(*p) << endl;
-        cout <<"msize  --- "<< _msize(p) << endl;
-
-        delete[] p;
+        if(n - 1) printf("%d ", n);
+        putchar('\n');
     }
-
     return 0;
 }
