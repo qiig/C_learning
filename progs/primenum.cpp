@@ -1,5 +1,5 @@
 #include <stdio.h>
-  
+// 质数因子
 int main(void){
     int n;
     while(scanf("%d", &n) == 1){
