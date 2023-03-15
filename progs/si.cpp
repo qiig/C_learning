@@ -1,20 +1,23 @@
 #include <stdio.h>
-#include <string.h>
     
-int main(void)
+int main()
 {
-int n,m=0;
-    scanf("%d",&n);
-    int a[10]={0};
-    while(n)
+    char ch;
+    int a[128] = { 0 };
+    int count = 0;
+    while (scanf("%c", &ch) == 1 && ch != '\n')
     {
-        if(a[n%10] == 0)
+        for (int i = 0; i <128; i++)
         {
-            a[n%10]++;
-            m = m*10 + n%10;
+            if (a[i] == 0 && ch == i)
+            {
+                a[i]++;
+                count++;
+                break;
+            }
         }
-        n /= 10;
     }
-    printf("%d\n",m);
-return 0;
+    printf("%d\n", count);
+
+    return 0;
 }
