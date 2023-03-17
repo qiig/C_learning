@@ -1,5 +1,7 @@
 # C/C++
 
+[toc]
+
 ## Introduction
 
 ## FileName & Function
@@ -15,16 +17,24 @@
 | [simint.cpp][7] | 剔除重复数 明明的随机数 | HJ3 | 数组， |
 | [mapDeSimi.cpp] | 合并表记录 | HJ8 | map，数组， |
 | [r_norepeat.cpp] | 逆向不重复数 | HJ9 | 数组，字符串， |
+| [p01shopping.cpp] | 购物单附加01背包 | HJ16 | DP |
 
 
 
-[1]: ./boh2d.cpp
-[2]: ./calculator.cpp
-[3]: ./divstr.cpp
-[4]: ./dtoh.cpp
-[5]: ./EulerCir.cpp
-[6]: ./primenum.cpp
-[7]: ./simint.cpp
-[mapDeSimi.cpp]: ./mapDeSimi.cpp
+[p01shopping.cpp]: ./p01shopping.cpp
 [r_norepeat.cpp]: ./r_norepeat.cpp
+[mapDeSimi.cpp]: ./mapDeSimi.cpp
+[7]: ./simint.cpp
+[6]: ./primenum.cpp
+[5]: ./EulerCir.cpp
+[4]: ./dtoh.cpp
+[3]: ./divstr.cpp
+[2]: ./calculator.cpp
+[1]: ./boh2d.cpp
+
+
+
+
+
+
 
