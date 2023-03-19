@@ -1,3 +1,7 @@
+// 利用栈和递归解决表达式形式的四则运算问题
+// 来源：https://blog.nowcoder.net/n/c4181f4a330a4f8b8fe681a79978e042?f=comment
+// Mar.19,2023
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
