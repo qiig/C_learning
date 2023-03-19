@@ -15,7 +15,7 @@ int compute(char* data)
     while (pos < len) {
         if (data[pos] == '{' || data[pos] == '[' || data[pos] == '(') {
             pos++;
-            num = compute(data);
+            num=compute(data);
         }
  
         while (pos < len && isdigit(data[pos])) {
