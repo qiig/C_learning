@@ -26,9 +26,13 @@
 | [high_add.c] | 高精度加法 | HJ57 | 字符串， |
 | [small_k.c] | k的最小数 | HJ58 | 排序，数组， |
 | [find_c_11.c] | 第一个只出现一次的字母 | HJ59 | 字符串，数组， |
-| [recursion_apple.c] | 递归放苹果 | HJ61 | 递归，DP， |
+| [recursion_apple.c] | 递归放苹果 | HJ61 | [递归][recursion_apple.c_1]，DP， |
+| [bit_n1.c] | 求对应二进制中连续1的个数 | HJ86 | [位运算][bit_n1.c_1]， |
 
 
+[bit_n1.c_1]: https://blog.nowcoder.net/n/13175663406e40338b5ee8693fd2294e?f=comment
+[bit_n1.c]: ./bit_n1.c
+[recursion_apple.c_1]: https://blog.nowcoder.net/n/c9bc6821b3cd469b9cdb56469809e946?f=comment
 [recursion_apple.c]: ./recursion_apple.c
 [find_c_11.c]: ./find_ch_11.c
 [small_k.c]: ./small_k.c

@@ -1,8 +1,10 @@
+#include<bitset>
 #include<iostream>
-#include<string>
-
 using namespace std;
-
-int main() {
-    
+int main(){
+    int n;
+    while(cin>>n){
+        bitset<32> b(n);
+        cout<<b.count()<<endl;
+    }
 }
