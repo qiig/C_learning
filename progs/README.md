@@ -25,8 +25,10 @@
 | [perfectnum.cpp] | 完全数 因子和等于自身 | HJ56 | 条件计数，| 
 | [high_add.c] | 高精度加法 | HJ57 | 字符串， |
 | [small_k.c] | k的最小数 | HJ58 | 排序，数组， |
+| [find_c_11.c] | 第一个只出现一次的字母 | HJ59 | 字符串，数组， |
 
 
+[find_c_11.c]: ./find_ch_11.c
 [small_k.c]: ./small_k.c
 [high_add.c]: ./hign_add.c
 [perfectnum.cpp]: ./perfectnum.cpp
