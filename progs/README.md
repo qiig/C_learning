@@ -23,7 +23,12 @@
 | [op_error.cpp] | 四则运算（双栈，有错误） | HJ50 | 栈，字符串， |
 | [op_right.cpp] | 四则运算（[单栈][op_right.cpp_1]） | HJ50 | 栈，递归，字符串， |
 | [perfectnum.cpp] | 完全数 因子和等于自身 | HJ56 | 条件计数，| 
+| [high_add.c] | 高精度加法 | HJ57 | 字符串， |
+| [small_k.c] | k的最小数 | HJ58 | 排序，数组， |
 
+
+[small_k.c]: ./small_k.c
+[high_add.c]: ./hign_add.c
 [perfectnum.cpp]: ./perfectnum.cpp
 [op_right.cpp_1]: https://blog.nowcoder.net/n/c4181f4a330a4f8b8fe681a79978e042?f=comment
 [op_error.cpp]: ./op_error.cpp

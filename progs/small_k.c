@@ -1,6 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+/* 
+    Input: n in [1, 1000]     n groups data
+          k <= n
+          val in [1, 10000]
+    Output: k integer numbers k1 < k2 < k3 < ...
+    Method: bubble sort
+*/
 int* getSort(int* an, int n); // n = len. of an
 
 int main() {
