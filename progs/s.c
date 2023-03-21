@@ -1,43 +1,45 @@
 #include <stdio.h>
-#include <string.h>
-
-// 输入学生姓名和成绩
-// 按成绩排名 0 为 降序 1 为升序
-// 成绩相同按输入顺序输出
-// 结构体，不改变顺序的排序，
-
-typedef struct stu {
-    char na[20];
-    int gr;
-} STU;
+#include <stdlib.h>
  
-int main(){
-    int n, isA;
-    while(scanf("%d %d", &n, &isA) != EOF){
-        STU cg, a[n];
-        for(int i = 0; i < n; i++){
-            scanf("%s %d", &a[i].na, &a[i].gr);
+typedef struct ListNode
+{
+    int m_nKey;
+    struct ListNode* m_pNext;
+} LST ;
+ 
+int main(void)
+{
+    int n, k, i, j;
+    LST *Last;
+    while( scanf("%d", &n)!=EOF )
+    {
+        LST *Header = (LST *)malloc( sizeof(LST) );
+        Header->m_pNext = NULL;
+        scanf("%d", Header);
+        Last = Header;
+        for(i=1; i<n; i++){
+            Last->m_pNext = (LST *)malloc( sizeof(LST) );
+            scanf("%d", Last->m_pNext);
+            Last = Last->m_pNext;
         }
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n - i - 1; j++){
-                if (isA) {
-                    if(a[j].gr > a[j+1].gr){
-                            cg = a[j+1];
-                            a[j+1] = a[j];
-                            a[j] = cg;
-                    }
-                } else {
-                    if(a[j].gr < a[j+1].gr){
-                        cg = a[j+1];
-                        a[j+1] = a[j];
-                        a[j] = cg;
-                    }
-                }
-
+        Last->m_pNext = NULL;
+         
+        scanf("%d", &k);
+        if(k>=1 && (j=n-k)>=0){
+            for(i=0; i<j; i++)
+            {
+                Last = Header->m_pNext;
+                free(Header);
+                Header = Last;
             }
+            printf("%d\n", Header->m_nKey);
         }
-        for(int i = 0; i < n; i++){
-            printf("%s %d\n",a[i].na, a[i].gr);
+        else printf("0\n");
+        while(Header)
+        {
+            Last = Header->m_pNext;
+            free(Header);
+            Header = Last;
         }
     }
     return 0;

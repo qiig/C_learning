@@ -28,8 +28,12 @@
 | [find_c_11.c] | 第一个只出现一次的字母 | HJ59 | 字符串，数组， |
 | [recursion_apple.c] | 递归放苹果 | HJ61 | [递归][recursion_apple.c_1]，DP， |
 | [bit_n1.c] | 求对应二进制中连续1的个数 | HJ86 | [位运算][bit_n1.c_1]， |
+| [ipmask.c] | 识别有效的IP和子网掩码 | HJ18 | 字符串，进制， |
+| [listnode_crd.c] | 创建单链表 倒数第k个数 | HJ51 | 链表，双指针， |
 
 
+[listnode_crd.c]: ./listnode_crd.c
+[ipmask.c]: ./ipmask.c
 [bit_n1.c_1]: https://blog.nowcoder.net/n/13175663406e40338b5ee8693fd2294e?f=comment
 [bit_n1.c]: ./bit_n1.c
 [recursion_apple.c_1]: https://blog.nowcoder.net/n/c9bc6821b3cd469b9cdb56469809e946?f=comment
