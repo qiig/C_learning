@@ -4,7 +4,7 @@ class Sudoku {
   public:
     Sudoku(int* sdkin); // 读入数独矩阵
     ~Sudoku() {};
-    void getPrint(); // 输入读入的矩阵
+    void getPrint(); // 输出读入的矩阵
     void getAns(); // 获取结果
     bool isAns(int row, int col, int val); // 判断是否为正确值
     void findAns(int row, int col); // 搜索解空间
