@@ -41,7 +41,26 @@
 
 用一组任意存储单元存放元素的，每个结点只有一个指针域的线性表。是顺序存储结构 (sequential access).
 
+#### 优缺点
 
+- 优点
+  - 插入和删除操作方便
+- 缺点
+  - 存储空间利用率较低
+
+#### 双链表与循环链表
+
+每个结点有前驱和后继两个指针域的线性表为 **双链表**，尾指针指向头节点的单链表为 **循环单链表**，**循环双链表** 头节点的前驱指针指向终端节点，终端节点的后继指针指向头节点。
+
+### 顺序表 OR 单链表
+
+- 查找需求频繁，插入和删除操作较少时顺序表更优。
+- 线性表中元素数目不定或变动较大时，链表更优。
+### 扩展
+
+静态链表和顺序表的动态分配。
+
+静态单链表 (static linked list) 的实现是以数组元素下标模拟链表指针，顺序表的动态分配是以更大空间的数组存储旧表及新插入元素。
 
 ## 文件列表
 
@@ -49,7 +68,17 @@
 | :--- | :--- | :--- | :--- |
 | [singlyLinkList] | singly linked list | List, | cpp |
 | [seqList] | sequential list | List, | h |
+| [doubleLinkList] | double linked list | List, | h |
+| [cir_singlyLinkList] | circular singly linked list | List, | h |
+| [cir_doubleLinkList] | circular double linked list | List, | h |
+| [staticLinkList] | static linked list | List, | h |
+| [dyn_seqList] | dynamic allocation for sequential list | List, | h |
 
 
+[dyn_seqList]: ./dyn_seqList.h
+[staticLinkList]: ./staticLinkList.h
+[cir_doubleLinkList]: ./cir_doubleLinkList.h
+[cir_singlyLinkList]: ./cir_singlyLinkList.h
+[doubleLinkList]: ./doubleLinkList.h
 [seqList]: ./seqList.h
 [singlyLinkList]: ./singlyLinkList.cpp

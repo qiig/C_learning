@@ -1,15 +1,15 @@
-#include "cir_doubleLinkList.h"
+#include "dyn_seqList.h"
 
 int main () {
     int r[5] = {1, 2, 3, 4, 5}, i, x;
-    cir_doubleLinkList<int> L{r, 5};
+    dyn_seqList<int> L{r, 5};
     cout << "Current Sequential List is: ";
     L.PrintList();
     try {
         L.Insert(1, 8);
         cout << "After Inserting SeqList is: ";
         L.PrintList();
-    } catch (char *str) {cout << str << endl;}
+    } catch (const char *str) {cout << str << endl;}
     cout << "Current Length of SeqList is: " << L.getLen() << endl;
     cout << "Input: val: ";
     cin >> x;
@@ -20,15 +20,15 @@ int main () {
         cout << "Input: pos: ";
         cin >> i;
         cout << i << "'s value is: " << L.getVal(i) << endl;
-    } catch (char *str) {cout << str << endl;}
+    } catch (const char *str) {cout << str << endl;}
     try {
         cout << "Input: pos which is supposed to be Deleted: ";
         cin >> i;
         x = L.Delete(i);
-        cout << x << "has been deleted. " << endl;
+        cout << x << " has been deleted. " << endl;
         cout << "Current SeqList is: ";
         L.PrintList();
-    } catch (char *str) {cout << str << endl;}
+    } catch (const char *str) {cout << str << endl;}
     return 0;
 }
 

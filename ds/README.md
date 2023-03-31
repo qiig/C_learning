@@ -22,7 +22,18 @@
 | :--- | :--- | :--- | :--- |
 | [singlyLinkList] | singly linked list | List, | cpp |
 | [seqList] | sequential list | List, | h |
+| [doubleLinkList] | double linked list | List, | h |
+| [cir_singlyLinkList] | circular singly linked list | List, | h |
+| [cir_doubleLinkList] | circular double linked list | List, | h |
+| [staticLinkList] | static linked list | List, | h |
+| [dyn_seqList] | dynamic allocation for sequential list | List, | h |
 
 
+[dyn_seqList]: ./dyn_seqList.h
+[staticLinkList]: ./staticLinkList.h
+[cir_doubleLinkList]: ./cir_doubleLinkList.h
+[cir_singlyLinkList]: ./cir_singlyLinkList.h
+[doubleLinkList]: ./doubleLinkList.h
 [seqList]: ./seqList.h
 [singlyLinkList]: ./singlyLinkList.cpp
+
