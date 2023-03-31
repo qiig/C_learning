@@ -198,5 +198,4 @@ cir_singlyLinkList<DataType>::~cir_singlyLinkList () {
         delete p;
         p = first;
     }
-    if (first == nullptr) cout << "destory succeed. " << endl;
 }
