@@ -21,6 +21,8 @@
 | FileName | Info. | Tag(s) | Lang. |
 | :--- | :--- | :--- | :--- |
 | [singlyLinkList] | singly linked list | List, | cpp |
+| [seqList] | sequential list | List, | h |
 
 
+[seqList]: ./seqList.h
 [singlyLinkList]: ./singlyLinkList.cpp

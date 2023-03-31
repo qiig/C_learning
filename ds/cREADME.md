@@ -18,19 +18,38 @@
 
 求解特定问题的指令的有限序列。
 
-**时间复杂度** 以基本语句的执行次数衡量。
+**时间复杂度**  以基本语句的执行次数衡量。
 
 ## 线性表
 
 ### 顺序表
 
+用一段连续的存储单元依次存储元素的线性表。
+
+**随机存取结构**(random access)  确定基地址后，计算任一元素地址的时间相等。
+
+#### 优缺点
+
+- 优点
+  - 查找速度快
+- 缺点
+  - 插入和删除需移动大量元素
+  - 表的容量难以确定
+  - 造成存储空间碎片
+
 ### 单链表
+
+用一组任意存储单元存放元素的，每个结点只有一个指针域的线性表。
+
+
 
 ## 文件列表
 
 | FileName | Info. | Tag(s) | Lang. |
 | :--- | :--- | :--- | :--- |
 | [singlyLinkList] | singly linked list | List, | cpp |
+| [seqList] | sequential list | List, | h |
 
 
+[seqList]: ./seqList.h
 [singlyLinkList]: ./singlyLinkList.cpp
