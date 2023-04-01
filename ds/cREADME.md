@@ -83,7 +83,12 @@
 | [seqQueue_2end] | double-ended sequential queue | Queue, List, | h |
 | [linkQueue] | linked queue | Queue, List, | h |
 | **[u]**[linkQueue_2end] | double-ended linked queue | Queue, List, | h |
+| [March] | march parenthese | Stack, List, | cpp |
+| [exprCal_a] | calculator of expression | Stack, List, | cpp |
 
+
+[exprCal_a]: ./exprCal_a.cpp
+[March]: ./March.cpp
 [linkQueue_2end]: ./linkQueue_2end.h
 [linkQueue]: ./linkQueue.h
 [seqQueue_2end]: ./seqQueue_2end.h
