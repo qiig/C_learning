@@ -73,8 +73,16 @@
 | [cir_doubleLinkList] | circular double linked list | List, | h |
 | [staticLinkList] | static linked list | List, | h |
 | [dyn_seqList] | dynamic allocation for sequential list | List, | h |
+| [JosephRing] | JosephRing: circular singly linked list | List, | cpp |
+| [JosephRing_a] | J.. | List, | cpp |
+| [Polynomial] | A(x) + B(x) | List, | cpp |
+| [Polynomial_a] | A.. | List, | cpp |
 
 
+[Polynomial_a]: ./Polynomial_a.cpp
+[Polynomial]: ./Polynomial.cpp
+[JosephRing_a]: ./JosephRing_a.cpp
+[JosephRing]: ./JosephRing.cpp
 [dyn_seqList]: ./dyn_seqList.h
 [staticLinkList]: ./staticLinkList.h
 [cir_doubleLinkList]: ./cir_doubleLinkList.h

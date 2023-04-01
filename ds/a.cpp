@@ -1,8 +1,8 @@
-#include "dyn_seqList.h"
+#include "cir_singlyLinkList.h"
 
 int main () {
     int r[5] = {1, 2, 3, 4, 5}, i, x;
-    dyn_seqList<int> L{r, 5};
+    cir_singlyLinkList<int> L{r, 5};
     cout << "Current Sequential List is: ";
     L.PrintList();
     try {
