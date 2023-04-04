@@ -12,5 +12,13 @@ int main(){
     try{
         T.LevelOrder();
     } catch(const char* s){cout << s << endl;}
+    // non recurrence traversing
+    cout << endl << "nPreOrder traverse is: ";
+    T.PreOrder();
+    cout << endl << "nInOrder traverse is: ";
+    T.InOrder();
+    cout << endl << "nPostOrder traverse is: ";
+    T.PostOrder();
+    cout << endl;
     return 0;
 }

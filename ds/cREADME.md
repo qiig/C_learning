@@ -87,8 +87,10 @@
 | [exprCal_a] | calculator of expression | Stack, List, | cpp |
 | [playCards] | send cards | String, | cpp |
 | [Queen] | queen problem | Array, | cpp |
+| [BiTree] | binary tree creating & (non) traversing | Binary Tree, | h |
 
 
+[BiTree]: ./BiTree.h
 [Queen]: ./Queen.cpp
 [playCards]: ./playCards.cpp
 [exprCal_a]: ./exprCal_a.cpp
