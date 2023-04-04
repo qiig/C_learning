@@ -88,8 +88,9 @@
 | [playCards] | send cards | String, | cpp |
 | [Queen] | queen problem | Array, | cpp |
 | [BiTree] | binary tree creating & (non) traversing | Binary Tree, | h |
+| [unionFind] | union & find set | Tree, | h |
 
-
+[unionFind]: ./unionFind.h
 [BiTree]: ./BiTree.h
 [Queen]: ./Queen.cpp
 [playCards]: ./playCards.cpp
