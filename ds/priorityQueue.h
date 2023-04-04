@@ -24,7 +24,7 @@
         }
         return 0;
     }
-#endif
+#endif  // main
 
 #include<iostream>
 using namespace std;
