@@ -4,6 +4,8 @@
     Binary Tree
     Level Order Traverse:
         changing sequential queue to circular queue.
+    PreOrder/InOrder/PostOrder traverse (recurrence)
+    nPreOrder/nInOrder/nPostOrder traverse (non recurrence)
 */
 #include<iostream>
 using namespace std;
@@ -21,7 +23,11 @@ class BiTree{
         void InOrder(){InOrder(root);}; // inorder traverse
         void PostOrder(){PostOrder(root);}; // postorder traverse
         void LevelOrder();  // lever order traverse
+        void nPreOrder();
+        void nInOrder();
+        void nPostOrder();
     private:
+        int Qsize, Ssize;   // size of a queue or a stack
         BiNode<DT> *Creat();
         void Release(BiNode<DT> *bt);
         void PreOrder(BiNode<DT> *bt);
@@ -32,9 +38,10 @@ class BiTree{
 template<typename DT>
 BiNode<DT> *BiTree<DT>::Creat(){
     BiNode<DT> *bt;
+    Qsize = 20, Ssize = 100;
     char ch;
     cin >> ch;
-    if(ch == '#') bt = nullptr;
+    if(ch == ',') bt = nullptr;
     else{
         bt = new BiNode<DT>;
         bt->data = ch;
@@ -81,7 +88,6 @@ void BiTree<DT>::PostOrder(BiNode<DT> *bt){
 }
 template<typename DT>
 void BiTree<DT>::LevelOrder(){  // changing sequential queue to circular queue
-    int Qsize = 20;
     BiNode<DT> *Q[Qsize], *q = nullptr;
     int front = Qsize - 1, rear = Qsize - 1;
     if(root == nullptr) return;
@@ -102,6 +108,67 @@ void BiTree<DT>::LevelOrder(){  // changing sequential queue to circular queue
             if((rear + 1) % Qsize == front) throw "error: overflow. ";
             rear = (rear + 1) % Qsize;
             Q[rear] = q->rchild;         
+        }
+    }
+}
+template<typename DT>
+void BiTree<DT>::nPreOrder(){
+    BiNode<DT> *bt = root;
+    BiNode<DT> *S[Ssize];
+    int top = -1;
+    while(bt != nullptr || top != -1){
+        while(bt != nullptr){
+            cout << bt->data;
+            S[++top] = bt;  // push(bt)
+            bt = bt->lchild;
+        }
+        if(top != -1){
+            bt = S[top--];
+            bt = bt->rchild;
+        }
+    }
+}
+template<typename DT>
+void BiTree<DT>::nInOrder(){
+    BiNode<DT> *bt = root;
+    BiNode<DT> *S[Ssize];
+    int top = -1;
+    while(bt != nullptr || top != -1){
+        while(bt != nullptr){
+            S[++top] = bt;  // push(bt)
+            bt = bt->lchild;
+        }
+        if(top != -1){
+            bt = S[top--];  // pop()
+            cout << bt->data;
+            bt = bt->rchild;
+        }
+    }
+}
+template<typename DT>
+struct element{
+    BiNode<DT> *ptr;
+    int flag;
+};  // setting a flag to mark status of lchild & rchild traversing
+template<typename DT>
+void BiTree<DT>::nPostOrder(){
+    BiNode<DT> *bt = root;
+    element<DT> S[Ssize];
+    int top = -1;
+    while(bt != nullptr || top != -1){
+        while(bt != nullptr){
+            top++;
+            S[top].ptr = bt;
+            S[top].flag = 1;    // push(bt & flag)
+            bt = bt->lchild;
+        }
+        while(top != -1 && S[top].flag == 2){
+            bt = S[top--].ptr;
+            cout << bt->data;
+        }
+        if(top != -1){
+            S[top].flag = 2;
+            bt = S[top].ptr->rchild;
         }
     }
 }
