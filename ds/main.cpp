@@ -1,24 +1,17 @@
-#include "BiTree.h"
+#include "ALGraph.h"
 // main
 int main(){
-    BiTree<char> T{};
-    cout << "PreOrder traverse is: ";
-    T.PreOrder();
-    cout << endl << "InOrder traverse is: ";
-    T.InOrder();
-    cout << endl << "PostOrder traverse is: ";
-    T.PostOrder();
-    cout << endl << "Level Order traverse is: ";
-    try{
-        T.LevelOrder();
-    } catch(const char* s){cout << s << endl;}
-    // non recurrence traversing
-    cout << endl << "nPreOrder traverse is: ";
-    T.PreOrder();
-    cout << endl << "nInOrder traverse is: ";
-    T.InOrder();
-    cout << endl << "nPostOrder traverse is: ";
-    T.PostOrder();
-    cout << endl;
+    char ch[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+    ALGraph<char> ALG{ch, 6, 6};
+    for(int i = 0; i < MaxS; i++){
+        visited[i] = 0;
+    }
+    cout << "depth first traverse: ";
+    ALG.DFTraverse(0);
+    for(int i = 0; i < MaxS; i++){
+        visited[i] = 0;
+    }
+    cout << endl << "breadth first traverse: ";
+    ALG.BFTraverse(0);
     return 0;
 }

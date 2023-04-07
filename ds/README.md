@@ -43,7 +43,12 @@
 | [Queen] | queen problem | Array, | cpp |
 | [BiTree] | binary tree creating & (non) traversing | Binary Tree, | h |
 | [unionFind] | union & find set | Tree, | h |
+| [MGraph] | adjacency matrix undirected graph | Graph, | h |
+| [ALGraph] | adjacency list graph | Graph, | h |
 
+
+[ALGraph]: ./ALGraph.h
+[MGraph]: ./MGraph.h
 [unionFind]: ./unionFind.h
 [BiTree]: ./BiTree.h
 [Queen]: ./Queen.cpp
