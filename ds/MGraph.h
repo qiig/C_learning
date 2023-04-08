@@ -7,8 +7,10 @@
 #include "MGraph.h"
 // main
 int main(){
+    int vn, en; // num. of vertices & edges
+    cin >> vn >> en;
     char ch[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-    MGraph<char> MG{ch, 6, 6};
+    MGraph<char> MG{ch, vn, en};
     for(int i = 0; i < MaxS; i++){
         visited[i] = 0;
     }
@@ -18,19 +20,49 @@ int main(){
         visited[i] = 0;
     }
     cout << endl << "breadth first traverse: ";
-    MG.BFTraverse(0);
+    try{
+        MG.BFTraverse(0);
+    } catch(const char* str){cout << str << endl;}
+    cout << endl << "prim: " << endl;
+    MG.Prim(0);
     return 0;
 }
 // test
-    data:
-    0 1 0 2 0 5 1 2 1 4 2 3
-    res:
+data:
+    6 6 0 1 1 0 2 1 0 5 1 1 2 1 1 4 1 2 3 1
+res:
     depth first traverse: ABCDEF
     breadth first traverse: ABCFED
+    prim:
+    0 -> 1 : 1
+    0 -> 2 : 1
+    2 -> 3 : 1
+    1 -> 4 : 1
+    0 -> 5 : 1
+data:
+    6 9
+    0 1 34
+    0 2 46
+    0 5 19
+    1 4 12
+    2 3 17
+    2 5 25
+    3 4 38
+    3 5 25
+    4 5 26
+res:
+    depth first traverse: ABEDCF
+    breadth first traverse: ABCFED
+    prim:
+    0 -> 5 : 19
+    5 -> 2 : 25
+    2 -> 3 : 17
+    5 -> 4 : 26
+    4 -> 1 : 12
 */
 #include<iostream>
 using namespace std;
-const int MaxS = 10;    // vertex
+const int MaxS = 101;    // vertex
 int visited[MaxS] = {0};
 template<typename DT>
 class MGraph{
@@ -39,50 +71,94 @@ class MGraph{
         ~MGraph(){};
         void DFTraverse(int v); // depth-first traverse & vertex v
         void BFTraverse(int v); // breadth-first traverse & vertex v
+        void Prim(int v);   // find minimal spanning tree
     private:
         DT vertex[MaxS];    // saving vertices
         int edge[MaxS][MaxS];   // saving edges
         int verN, edgN; // saving n & e
+        const int maxWei = 99999;   // max weigh
+        const int MaxSQ = 21;   // max queue
+        int MinEdge(int lc[], int verN);   // find min weight and return its index
 };
 template<typename DT>
 MGraph<DT>::MGraph(DT a[], int n, int e){
-    int r, c;
+    int r, c, w;
     verN = n; edgN = e;
     for(int i = 0; i < verN; i++){
         vertex[i] = a[i];
     }
     for(int i = 0; i < verN; i++){
         for(int j = 0; j < verN; j++){
-            edge[i][j] = 0; // init edge
+            if(i == j) edge[i][j] = 0; // init edge
+            else edge[i][j] = maxWei;
         }
     }
     for(int i = 0; i < edgN; i++){
-        cin >> r >> c;
-        edge[r][c] = 1; edge[c][r] = 1; // undirected graph
+        cin >> r >> c >> w;
+        edge[r][c] = w; edge[c][r] = w; // undirected graph
     }
 }
 template<typename DT>
 void MGraph<DT>::DFTraverse(int v){
     cout << vertex[v]; visited[v] = 1;
     for(int j = 0; j < verN; j++){
-        if(edge[v][j] == 1 && visited[j] == 0) DFTraverse(j);
+        if(edge[v][j] != 0 && edge[v][j] < maxWei && visited[j] == 0) DFTraverse(j);
     }
 }
 template<typename DT>
 void MGraph<DT>::BFTraverse(int v){
-    int w, Q[MaxS];
+    int w, Q[MaxSQ];
     int front = -1, rear = -1;  // init queue
     cout << vertex[v]; visited[v] = 1;
-    Q[++rear] = v;
+    if((rear + 1) % MaxSQ == front) throw "error: overflow. ";
+    rear = (rear + 1) % MaxSQ;
+    Q[rear] = v;
     while(front != rear){   // queue is not empty
-        w = Q[++front]; 
+        if(rear == front) throw "error: underflow. ";
+        front = (front + 1) % MaxSQ;
+        w = Q[front]; 
         for(int i = 0; i < verN; i++){
-            if(edge[w][i] == 1 && visited[i] == 0){
+            if(edge[w][i] != 0 && edge[w][i] < maxWei && visited[i] == 0){
                 cout << vertex[i]; visited[i] = 1;
-                Q[++rear] = i;
+                if((rear + 1) % MaxSQ == front) throw "error: overflow. ";
+                rear = (rear + 1) % MaxSQ;
+                Q[rear] = i;
             }
         }
     }
+}
+template<typename DT>
+void MGraph<DT>::Prim(int v){
+    int vi;
+    int adjvex[MaxS], lowcost[MaxS];
+    for(int i = 0; i < verN; i++){  // init
+        lowcost[i] = edge[v][i];
+        adjvex[i] = v;
+    }
+    lowcost[v] = 0; // v in U
+    for(int i = 1; i < verN; i++){
+        vi = MinEdge(lowcost, verN);    // find vi of minimal edge
+        cout << adjvex[vi] << " -> " << vi << " : " << lowcost[vi] << endl;
+        lowcost[vi] = 0;    // vi in U
+        for(int j = 0; j < verN; j++){
+            if(edge[j][vi] < lowcost[j]){
+                lowcost[j] = edge[j][vi];
+                adjvex[j] = vi;
+            }
+        }
+    }
+}
+template<typename DT>
+int MGraph<DT>::MinEdge(int lc[], int verN){
+    int minVal, minInd; // minimal value & its index
+    minVal = maxWei; minInd = 0;
+    for(int i = 1; i < verN; i++){
+        if(minVal > lc[i] && lc[i] != 0){
+            minVal = lc[i];
+            minInd = i;
+        }
+    }
+    return minInd;
 }
 
 #endif  // matrix saving method of undirected graph
