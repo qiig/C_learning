@@ -91,8 +91,10 @@
 | [unionFind] | union & find set | Tree, | h |
 | [MGraph] | adjacency matrix undirected graph | Graph, | h |
 | [ALGraph] | adjacency list graph | Graph, | h |
+| [EdgeGraph] | edge set array : kruskal | Graph, | h |
 
 
+[EdgeGraph]: ./EdgeGraph.h
 [ALGraph]: ./ALGraph.h
 [MGraph]: ./MGraph.h
 [unionFind]: ./unionFind.h

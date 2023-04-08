@@ -1,4 +1,4 @@
-#include "MGraph.h"
+#include "MGraph_k.h"
 // main
 int main(){
     int vn, en; // num. of vertices & edges
@@ -19,6 +19,8 @@ int main(){
     } catch(const char* str){cout << str << endl;}
     cout << endl << "prim: " << endl;
     MG.Prim(0);
+    cout << "Kruskal: " << endl;
+    MG.Kruskal();
     return 0;
 }
 /*
@@ -27,10 +29,9 @@ int main(){
 0 2 46
 0 5 19
 1 4 12
+3 5 25
 2 3 17
 2 5 25
 3 4 38
-3 5 25
 4 5 26
 */
-// 6 6 0 1 1 0 2 1 0 5 1 1 2 1 1 4 1 2 3 1
