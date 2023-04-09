@@ -29,6 +29,11 @@ int main(){
     MG.Kruskal();
     cout << "Dijkstal: " << endl;
     MG.Dijkstra(0);
+    cout << "Floyd: A -> C " << endl;
+    MG.Floyd();
+    MG.PrintFloyd(0,2);
+    cout << "Floyd: " << endl;
+    MG.PrintFloyd();    
     return 0;
 }
 // test
@@ -128,8 +133,37 @@ res4:
     A -> D: 30
     A -> D -> C: 50
     A -> D -> C -> E: 60  
+data5:  +Floyed
+    3 5 1
+    0 1 4
+    0 2 11
+    1 0 6
+    1 2 2
+    2 0 3
+res5:
+    depth first traverse: ABC
+    breadth first traverse: ABC
+    prim:
+    0 -> 1 : 4
+    0 -> 2 : 11
+    Kruskal:
+    (1, 2) 2
+    (2, 0) 3
+    Dijkstal:
+    A -> B: 4
+    A -> B -> C: 6
+    Floyd: A -> C
+    A -> B -> C: 6
+    Floyd:
+    A -> B: 4
+    A -> B -> C: 6
+    B -> C -> A: 5
+    B -> C: 2
+    C -> A: 3
+    C -> A -> B: 7
 */
 #include<iostream>
+#include<string>
 using namespace std;
 const int MaxS = 101;    // vertex
 const int MaxE = 101;   // edge
@@ -146,7 +180,10 @@ class MGraph{
         void BFTraverse(int v); // breadth-first traverse & vertex v
         void Prim(int v);   // find minimal spanning tree
         void Kruskal(); // find minimal spanning tree 
-        void Dijkstra(int v);   // find shortest path
+        void Dijkstra(int v);   // find shortest path (singal source: v to vj)
+        void Floyd();   // find shortest path (vi to vj)        
+        void PrintFloyd();
+        void PrintFloyd(int vo, int vi);
     private:
         DT vertex[MaxS];    // saving vertices
         int edge[MaxS][MaxS];   // saving edges
@@ -157,6 +194,8 @@ class MGraph{
         int MinEdge(int lc[], int verN);   // find min weight and return its index
         int FindRoot(int parent[], int v);  // find the root of vertex v
         void GetEdgeS();
+        int dist[MaxS][MaxS];
+        string path[MaxS][MaxS];
 };
 template<typename DT>
 MGraph<DT>::MGraph(DT a[], int n, int e, int isDire){
@@ -294,28 +333,69 @@ int MGraph<DT>::FindRoot(int parent[], int v){
 template<typename DT>
 void MGraph<DT>::Dijkstra(int v){
     string a, b;
-    int k, dist[MaxS];  // current shortest path weight from source v to destination vi
-    string path[MaxS];  // current shortest path from v to vi
+    int k, ddist[MaxS];  // current shortest path weight from source v to destination vi
+    string dpath[MaxS];  // current shortest path from v to vi
     for(int i = 0; i < verN; i++){  // init dist[] & path[]
-        dist[i] = edge[v][i];
-        if(dist[i] != maxWei){  
+        ddist[i] = edge[v][i];
+        if(ddist[i] != maxWei){  
             a = vertex[v]; b = vertex[i];   // char to string
-            path[i] = a + " -> " + b;    // existing path from v to vi
+            dpath[i] = a + " -> " + b;    // existing path from v to vi
         } else{
-            path[i] = "";
+            dpath[i] = "";
         }
     }
     for(int j = 1; j < verN; j++){
-        k = MinEdge(dist, verN);    // MinEdge() is used to find the index of the min element
-        cout << path[k] << ": " << dist[k] << endl;
+        k = MinEdge(ddist, verN);    // MinEdge() is used to find the index of the min element
+        cout << dpath[k] << ": " << ddist[k] << endl;
         for(int i = 0; i < verN; i++){
-            if(dist[i] > dist[k] + edge[k][i]){
-                dist[i] = dist[k] + edge[k][i];
-                path[i] = path[k] + " -> " + vertex[i];
+            if(ddist[i] > ddist[k] + edge[k][i]){
+                ddist[i] = ddist[k] + edge[k][i];
+                dpath[i] = dpath[k] + " -> " + vertex[i];
             }
         }
-        dist[k] = 0;    // adding vertex k to set S
+        ddist[k] = 0;    // adding vertex k to set S
     }
+}
+template<typename DT>
+void MGraph<DT>::Floyd(){
+    int c;
+    string a, b;
+    for(int i = 0; i < verN; i++){
+        for(int j = 0; j < verN; j++){
+            dist[i][j] = edge[i][j];
+            if(dist[i][j] != maxWei){
+                a = vertex[i]; b = vertex[j];
+                path[i][j] = a + " -> " + b;
+            } else{
+                path[i][j] = "";
+            }
+        }
+    }
+    for(int k = 0; k < verN; k++)
+        for(int i = 0; i < verN; i++)
+            for(int j = 0; j < verN; j++){
+                if(dist[i][k] + dist[k][j] < dist[i][j]){
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                    a = path[k][j];
+                    c = a.length();
+                    b = a.substr(1, c);
+                    path[i][j] = path[i][k] + b;
+                }
+            }
+}
+template<typename DT>
+void MGraph<DT>::PrintFloyd(){
+    for(int i = 0; i < verN; i++){
+        for(int j = 0; j < verN; j++){
+            if(i != j){
+                PrintFloyd(i, j);
+            }
+        }
+    }
+}
+template<typename DT>
+void MGraph<DT>::PrintFloyd(int vo, int vi){
+    cout << path[vo][vi] << ": " << dist[vo][vi] << endl;
 }
 
 #endif  // matrix saving method of undirected graph

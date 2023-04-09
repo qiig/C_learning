@@ -23,15 +23,18 @@ int main(){
     MG.Kruskal();
     cout << "Dijkstal: " << endl;
     MG.Dijkstra(0);
+    cout << "Floyd: A -> C " << endl;
+    MG.Floyd();
+    MG.PrintFloyd(0,2);
+    cout << "Floyd: " << endl;
+    MG.PrintFloyd();    
     return 0;
 }
 /*
-5 7 1
-0 1 10
-0 3 30
-0 4 100
-1 2 50
-2 4 10
-3 2 20
-3 4 60
+3 5 1
+0 1 4
+0 2 11
+1 0 6
+1 2 2
+2 0 3
 */
