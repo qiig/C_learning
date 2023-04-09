@@ -1,10 +1,10 @@
-#include "MGraph_k.h"
+#include "MGraph_kd.h"
 // main
 int main(){
-    int vn, en; // num. of vertices & edges
-    cin >> vn >> en;
+    int vn, en, isDire; // num. of vertices & edges
+    cin >> vn >> en >> isDire;  // isDire = 0: undirected graph
     char ch[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-    MGraph<char> MG{ch, vn, en};
+    MGraph<char> MG{ch, vn, en, isDire};
     for(int i = 0; i < MaxS; i++){
         visited[i] = 0;
     }
@@ -21,17 +21,17 @@ int main(){
     MG.Prim(0);
     cout << "Kruskal: " << endl;
     MG.Kruskal();
+    cout << "Dijkstal: " << endl;
+    MG.Dijkstra(0);
     return 0;
 }
 /*
-6 9
-0 1 34
-0 2 46
-0 5 19
-1 4 12
-3 5 25
-2 3 17
-2 5 25
-3 4 38
-4 5 26
+5 7 1
+0 1 10
+0 3 30
+0 4 100
+1 2 50
+2 4 10
+3 2 20
+3 4 60
 */

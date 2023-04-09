@@ -46,8 +46,11 @@
 | [MGraph] | adjacency matrix undirected graph | Graph, | h |
 | [ALGraph] | adjacency list graph | Graph, | h |
 | [EdgeGraph] | edge set array : kruskal | Graph, | h |
+| [MGrap_k] | Kruskal: finding minimal spanning tree | Graph, Kruskal, | h |
+| [MGraph_kd] | Dijkstra: finding the shortest path | Graph, Dijkstra, | h |
 
-
+[MGraph_k]: ./MGraph_k.h
+[MGraph_kd]: ./MGraph_kd.h
 [EdgeGraph]: ./EdgeGraph.h
 [ALGraph]: ./ALGraph.h
 [MGraph]: ./MGraph.h
