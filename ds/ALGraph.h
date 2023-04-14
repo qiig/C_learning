@@ -44,13 +44,13 @@ struct VertexNode{
 };
 template<typename DT>
 class ALGraph{
+    VertexNode<DT> adjlist[MaxS];   // saving vertex nodes
     public:
         ALGraph(DT a[], int n, int e);
         ~ALGraph();
         void DFTraverse(int v); // depth first traverse
         void BFTraverse(int v); // breadth first traverse
-    private:
-        VertexNode<DT> adjlist[MaxS];   // saving vertex nodes
+    protected:
         int vertexN, edgeN;
 };
 template<typename DT>

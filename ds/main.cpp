@@ -1,16 +1,22 @@
-#include "RadixSort.h"
+#include "ALGraph_ts.h"
 // main
 int main(){
-    int select;
-    int r[10] = {2, 5, 1, 7, 9, 4, 3, 6, 5, 8};
-    // int r[10] = {61, 98, 12, 15, 20, 24, 31, 99, 23, 35};
-    RadixSort<int> L{r, 10, 2};
-    // L.GetAns();
-    L.Print();
+    char ch[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    AovGraph<char> ALG{ch, 7, 10};
+    for(int i = 0; i < MaxS; i++){
+        visited[i] = 0;
+    }
+    cout << "depth first traverse: ";
+    ALG.DFTraverse(0);
+    for(int i = 0; i < MaxS; i++){
+        visited[i] = 0;
+    }
+    cout << endl << "breadth first traverse: ";
+    ALG.BFTraverse(0);
+    cout << endl << "topological sort: ";
+    ALG.TopSort();
     return 0;
 }
-
 /*
-int r[10] = {2, 5, 1, 7, 9, 4, 3, 6, 5, 8};
-int r[10] = {61, 98, 12, 15, 20, 24, 31, 99, 23, 35};
+1 3 1 2 0 2 0 4 3 5 2 5 2 6 2 4 4 6 5 6
 */

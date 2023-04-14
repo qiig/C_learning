@@ -8,16 +8,25 @@
 #include "AovGraph.h"
 // main
 int main(){
-
+    char ch[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    AovGraph<char> ALG{ch, 7, 10};
+    cout << "topological sort: ";
+    ALG.TopSort();
+    return 0;
 }
-
 // test
 data1:
-
+    1 3 1 2 0 2 0 4 3 5 2 5 2 6 2 4 4 6 5 6
 res1:
-
+    topological sort: BDACFEG
 */
-#include "ALGraph.h"
+#include<iostream>
+using namespace std;
+const int MaxS = 10;
+struct EdgeNode{
+    int adjvex;
+    EdgeNode* next;
+};
 template<typename DT>
 struct VerNode{
     int in;
@@ -80,12 +89,12 @@ void AovGraph<DT>::TopSort(){
         cout << adjlist[j].vertex;
         cnt++;
         p = adjlist[j].firstEdge;
-    }
-    while(p != nullptr){
-        k = p->adjvex;
-        adjlist[k].in--;
-        if(adjlist[k].in == 0) S[++top] = k;
-        p = p->next;
+        while(p != nullptr){
+            k = p->adjvex;
+            adjlist[k].in--;
+            if(adjlist[k].in == 0) S[++top] = k;
+            p = p->next;
+        }
     }
     if(cnt < vertexN) cout << "existing circuit!";
 }

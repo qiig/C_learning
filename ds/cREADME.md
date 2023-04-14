@@ -96,7 +96,9 @@
 | [MGraph_kd] | Dijkstra: finding the shortest path | Graph, Dijkstra, | h |
 | [Sort] | Sort Method based on comparing | Sort, | h |
 | [RadixSort] | radix sort | Sort, | h |
+| [AovGraph] | activity of vertex network: topological sort | Graph, TopSort, | h |
 
+[AovGraph]: ./AovGraph.h
 [RadixSort]: ./RadixSort.h
 [Sort]: ./Sort.h
 [MGraph_k]: ./MGraph_k.h
