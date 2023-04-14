@@ -94,7 +94,9 @@
 | [EdgeGraph] | edge set array : kruskal | Graph, Kruskal | h |
 | [MGrap_k] | Kruskal: finding minimal spanning tree | Graph, Kruskal, | h |
 | [MGraph_kd] | Dijkstra: finding the shortest path | Graph, Dijkstra, | h |
+| [Sort] | Sort Method based on comparing | Sort, | h |
 
+[Sort]: ./Sort.h
 [MGraph_k]: ./MGraph_k.h
 [MGraph_kd]: ./MGraph_kd.h
 [EdgeGraph]: ./EdgeGraph.h
