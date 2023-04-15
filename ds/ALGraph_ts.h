@@ -12,26 +12,17 @@ template<typename DT>
 class AovGraph: public ALGraph<DT>{
     VerNode<DT> adjlist[MaxS];
     public:
-        AovGraph(DT a[], int n, int e);
+        AovGraph(DT a[], int n, int e):ALGraph<DT>(a, n, e){};
         ~AovGraph();
         void TopSort();     // topological sort
 };
 template<typename DT>
-AovGraph<DT>::AovGraph(DT a[], int n, int e){
-    int vo, vi; // vertex out / in
-    EdgeNode* s = nullptr;
-    vertexN = n; edgeN = e;
+AovGraph<DT>::AovGraph(DT a[], int n, int e):ALGraph<DT>(a, n, e){
     for(int i = 0; i < vertexN; i++){
         adjlist[i].in = 0;
-        adjlist[i].vertex = a[i];
-        adjlist[i].firstEdge = nullptr;
     }
     for(int i = 0; i < edgeN; i++){
         cin >> vo >> vi;
-        s = new EdgeNode;
-        s->adjvex = vi;
-        s->next = adjlist[vo].firstEdge;
-        adjlist[vo].firstEdge = s;
         adjlist[vi].in++;
     }
 }
