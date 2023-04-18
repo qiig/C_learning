@@ -1,25 +1,9 @@
-#include "unionFind.h"
-// main
+#include<iostream>
+using namespace std;
+int f(int a, int b = 20, int c = 30){
+    return a+b+c;
+}
 int main(){
-    int n;
-    char x, y, ch[100];
-    cout << "Input n: ";
-    while(cin >> n && n > 0){
-        for(int i = 0; i < n; i++)
-            cin >> ch[i];
-        unionFind UF{ch, n};
-        cout << "Input finding value: ";
-        cin >> x;
-        cout << x << "'s root is: " << UF.Find(x) << endl;
-        cout << "Input unioning 2 values: ";
-        cin >> x >> y;
-        cout << x << "'s root is: " << UF.Find(x) << "  &  ";
-        cout << y << "'s root is: " << UF.Find(y) << endl;
-        UF.Union(x, y);
-        cout << "after: " << endl;
-        cout << x << "'s root is: " << UF.Find(x) << "  &  ";
-        cout << y << "'s root is: " << UF.Find(y) << endl;
-        cout << "Input n: ";
-    }
+    cout << f(10,10) << endl;
     return 0;
 }
