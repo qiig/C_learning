@@ -115,42 +115,61 @@ void EmpeMg::Add_Emp()
 			int id;
 			string name;
 			int dSelect;
+			int curSize = this->EmpNum;
 			while (true)
 			{
 				cout << "Input No." << i + 1 << "'s Infomation: " << endl;
 				cout << "ID: ";
 				cin >> id;
 				// check used ID
-				int res = this->IsID(id, 0, this->EmpNum);
+				int res = 0;
+				res = this->IsID(id, 0, curSize);
+#if 0
+				for (int j = 0; j < curSize; i++)
+				{
+					if (newSpace[j]->ID == id)
+					{
+						res = 1; break;
+					}
+				}
+#endif
 				if (res != 1)	// ID is space
 				{
 					cout << "Name: ";
 					cin >> name;
-					cout << "Department: " << endl;
-					cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
-					cout << "Select: ";
-					cin >> dSelect;
-
-					Staffs* worker = NULL;
-					switch (dSelect)
+					while (true)
 					{
-					case 1:
-						worker = new Employee(id, name, 1);
-						break;
-					case 2:
-						worker = new Manager(id, name, 2);
-						break;
-					case 3:
-						worker = new Boss(id, name, 3);
-						break;
-					default:
-						break;
+						cout << "Department: " << endl;
+						cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
+						cout << "Select: ";
+						cin >> dSelect;
+						if (dSelect > 0 && dSelect < 4)
+						{
+							Staffs* worker = NULL;
+							switch (dSelect)
+							{
+							case 1:
+								worker = new Employee(id, name, 1);
+								break;
+							case 2:
+								worker = new Manager(id, name, 2);
+								break;
+							case 3:
+								worker = new Boss(id, name, 3);
+								break;
+							default:
+								break;
+							}
+							// saving Staffs to array
+							newSpace[this->EmpNum + i] = worker;
+							curSize++;
+							break;
+						}
+						else
+						{
+							cout << "wrong department index " << endl;
+						}
 					}
-					// saving Staffs to array
-					newSpace[this->EmpNum + i] = worker;
-					delete[] this->stArray;
-					this->stArray = newSpace;
-					this->EmpNum++;
 					break;
 				}
 				else
@@ -422,10 +441,13 @@ void EmpeMg::Mod_Emp()
 			else	// more than one staff named "name"
 			{
 				bool flag = false;
+				int reptS = 0, reptID[20] = { 0 };	// max repeated name = 20
+				bool reptFlag = false;
 				for (int i = 0; i < this->EmpNum; i++)
 				{
 					if (this->stArray[i]->Name == name)
 					{
+						reptID[reptS++] = this->stArray[i]->ID;
 						this->stArray[i]->showInfo();
 						flag = true;
 					}
@@ -434,64 +456,93 @@ void EmpeMg::Mod_Emp()
 				{
 					cout << "No Staff named " << name << endl;
 				}
-				cout << "Input Staff ID from repeated Staff Name: ";
-				int id;
-				cin >> id;
-				int res = this->IsExist(id);
-				if (res != -1)
+				while (true)
 				{
-					delete this->stArray[res];
-
-					int newId = 0;
-					string newName = "";
-					int dSelect = 0;
-
-					while (true)
+					cout << "Input Staff ID from repeated Staff Name: ";
+					int id;
+					cin >> id;
+					for (int k = 0; k < reptS; k++)
 					{
-						int res2 = 0, res3 = 0;
-						cout << "New ID: ";
-						cin >> newId;
-						res2 = this->IsID(newId, 0, res);
-						res3 = this->IsID(newId, res + 1, this->EmpNum);
-						if (res2 == 0 && res3 == 0)
+						if (reptID[k] == id)
 						{
-							cout << "New Name: ";
-							cin >> newName;
-							cout << "New Department: " << endl;
-							cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
-							cin >> dSelect;
+							reptFlag = true; break;
+						}
+					}
+					// id in ids of the name
+					if (reptFlag)
+					{
+						int res = this->IsExist(id);
+						if (res != -1)
+						{
+							delete this->stArray[res];
 
-							Staffs* worker = NULL;
-							switch (dSelect)
+							int newId = 0;
+							string newName = "";
+							int dSelect = 0;
+
+							while (true)
 							{
-							case 1:
-								worker = new Employee(newId, newName, 1);
-								break;
-							case 2:
-								worker = new Manager(newId, newName, 2);
-								break;
-							case 3:
-								worker = new Boss(newId, newName, 3);
-								break;
-							default:
-								break;
-							}
+								int res2 = 0, res3 = 0;
+								cout << "New ID: ";
+								cin >> newId;
+								res2 = this->IsID(newId, 0, res);
+								res3 = this->IsID(newId, res + 1, this->EmpNum);
+								if (res2 == 0 && res3 == 0)
+								{
+									cout << "New Name: ";
+									cin >> newName;
+									while (true)
+									{
+										cout << "New Department: " << endl;
+										cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
+										cin >> dSelect;
+										if (dSelect > 0 && dSelect < 4)
+										{
+											Staffs* worker = NULL;
+											switch (dSelect)
+											{
+											case 1:
+												worker = new Employee(newId, newName, 1);
+												break;
+											case 2:
+												worker = new Manager(newId, newName, 2);
+												break;
+											case 3:
+												worker = new Boss(newId, newName, 3);
+												break;
+											default:
+												break;
+											}
 
-							this->stArray[res] = worker;
-							this->saveF();
-							cout << "Modify Succeed " << endl;
-							break;
+											this->stArray[res] = worker;
+											this->saveF();
+											cout << "Modify Succeed " << endl;
+											break;
+										}
+										else
+										{
+											cout << "wrong department index " << endl;
+										}
+									}
+									break;
+								}
+								else
+								{
+									cout << "Staff ID has been used " << endl;
+								}
+							}
 						}
 						else
 						{
-							cout << "Staff ID has been used " << endl;
+							cout << "No Staff ID is " << id << endl;
 						}
+						break;
 					}
-				}
-				else
-				{
-					cout << "No Staff ID is " << id << endl;
-				}
+					else
+					{
+						cout << "no " << name << "'s ID is " << id << endl;
+					}
+				}	
 			}
 		}
 		else if (s == 1)	// ID
@@ -520,29 +571,39 @@ void EmpeMg::Mod_Emp()
 					{
 						cout << "New Name: ";
 						cin >> newName;
-						cout << "New Department: " << endl;
-						cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
-						cin >> dSelect;
-
-						Staffs* worker = NULL;
-						switch (dSelect)
+						while (true)
 						{
-						case 1:
-							worker = new Employee(newId, newName, 1);
-							break;
-						case 2:
-							worker = new Manager(newId, newName, 2);
-							break;
-						case 3:
-							worker = new Boss(newId, newName, 3);
-							break;
-						default:
-							break;
-						}
+							cout << "New Department: " << endl;
+							cout << "| 1 Employee | 2 Manager |  3 Boss  |" << endl;
+							cin >> dSelect;
+							if (dSelect > 0 && dSelect < 4)
+							{
+								Staffs* worker = NULL;
+								switch (dSelect)
+								{
+								case 1:
+									worker = new Employee(newId, newName, 1);
+									break;
+								case 2:
+									worker = new Manager(newId, newName, 2);
+									break;
+								case 3:
+									worker = new Boss(newId, newName, 3);
+									break;
+								default:
+									break;
+								}
 
-						this->stArray[res] = worker;
-						this->saveF();
-						cout << "Modify Succeed " << endl;
+								this->stArray[res] = worker;
+								this->saveF();
+								cout << "Modify Succeed " << endl;
+								break;
+							}
+							else
+							{
+								cout << "wrong department index " << endl;
+							}
+						}
 						break;
 					}
 					else
