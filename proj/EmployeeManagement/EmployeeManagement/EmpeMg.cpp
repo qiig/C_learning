@@ -102,6 +102,7 @@ void EmpeMg::Add_Emp()
 	{
 		int newSize = this->EmpNum + addNum;	// new array size
 		Staffs** newSpace = new Staffs * [newSize];
+		int addIDcnt = 0, addID[ADDIDMAX] = { -1 };	// max new staffs
 		// copy old data to new array
 		if (this->stArray != NULL)
 		{
@@ -124,10 +125,10 @@ void EmpeMg::Add_Emp()
 				// check used ID
 				int res = 0;
 				res = this->IsID(id, 0, curSize);
-#if 0
-				for (int j = 0; j < curSize; i++)
+#if 1
+				for (int j = 0; j < addIDcnt; j++)
 				{
-					if (newSpace[j]->ID == id)
+					if (addID[j] == id)
 					{
 						res = 1; break;
 					}
@@ -162,6 +163,7 @@ void EmpeMg::Add_Emp()
 							}
 							// saving Staffs to array
 							newSpace[this->EmpNum + i] = worker;
+							addID[addIDcnt++] = id;
 							curSize++;
 							break;
 						}
@@ -441,7 +443,7 @@ void EmpeMg::Mod_Emp()
 			else	// more than one staff named "name"
 			{
 				bool flag = false;
-				int reptS = 0, reptID[20] = { 0 };	// max repeated name = 20
+				int reptS = 0, reptID[ADDIDMAX] = { 0 };	// max repeated name = 20
 				bool reptFlag = false;
 				for (int i = 0; i < this->EmpNum; i++)
 				{

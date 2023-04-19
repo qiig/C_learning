@@ -7,6 +7,7 @@
 #include "Manager.h"
 #include "Boss.h"
 #define FILENAME "StaffsData.txt"
+#define ADDIDMAX 20		// max new staffs in once
 using namespace std;
 
 class EmpeMg
