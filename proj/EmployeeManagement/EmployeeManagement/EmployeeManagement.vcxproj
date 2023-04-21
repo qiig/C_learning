@@ -138,7 +138,14 @@
     <ClInclude Include="EmpeMg.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Staffs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EmployeeManagement.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\8666264_free_code_camp_icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
