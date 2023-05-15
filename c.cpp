@@ -58,9 +58,9 @@ int main() {
         }
         // solve
         int res = 0, res2 = 0, res3 = 0;
-        maxF = 0; res = solu1();
+        // maxF = 0; res = solu1();
         // maxF = 0; initMap(); res2 = solu2();
-        // maxF = 0; initMap(); res3 = solu3();
+        maxF = 0; initMap(); res3 = solu3();
         // output
         cout << "#" << T-t << " " << res << " " << res2 << " " << res3 << endl;
     }
@@ -74,6 +74,7 @@ int getF()
         z = 1;
         for(int j = 0; j < M; j++){
             z &= map[i][j];
+            if(!z) break;
         }
         if(z) ++sum;
     }
@@ -191,7 +192,6 @@ void fac(int cnt)
     if(cnt == K){
         int cur = getF();
         if(cur > maxF) maxF = cur;
-        // initMap();
         return;
     }
     //
@@ -199,7 +199,7 @@ void fac(int cnt)
         changeCol(i);
         fac(++cnt);
         changeCol(i);
-        cnt--;
+        --cnt;
     }
 }
 

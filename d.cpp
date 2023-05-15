@@ -1,168 +1,163 @@
+/*
+    permutation & combination
 
+*/
 #include<iostream>
 using namespace std;
 
-// solution3
-// int solu3()
-// {
-//     // pre
-//     int res = 0;
-//     // k = 1
-//     getCnk_01(M, K);
-//     // k in [2, K]
-//     for(int i = 2; i <= K; i++){
-//         for(int j = 0; j < M; j++){
-//             // initMap();
-//             if(i&1) changeCol(j);
-//             getCnk_01(M-1, K-i, j);
-//             if(i&1) changeCol(j);
-//         }
-//     }
-//     // return
-//     res = maxF;
-//     return res;
-// }
-void printRes(int* a, bool* index, int n)      // print result of 0-1 combination
-{
-    for(int i = 0; i < n; i++){
-        if(index[i]) cout << a[i] << " ";
-    }
-    cout << endl;
-    // check f
-    // int cur = getF();
-    // if(cur > maxF) maxF = cur;
-    // re
-    // for(int i = 0; i < n; i++){
-    //     if(index[i]) changeCol(a[i]-1);
-    // }
+// global
 
-    return;
+// functions
+
+// permutation
+void permutation(int start, int end, int a[]);
+
+// combination dfs
+void combination_dfs(int pos, int cnt, int n, int m, int a[], bool ind[]);
+
+// combination 0-1
+void combination_01(int* a, int n, int m);
+void printRes(int* a, bool* vis, int n);
+bool hasDone(bool* vis, int n, int m);
+
+
+// main
+int main()
+{
+    int n, m, k;
+    while(cin >> n >> m >> k && n != 0)
+    {
+        // pre a & vis
+        int* a = new int[n];
+        bool* vis = new bool[n];
+        for(int i = 0; i < n; i++){
+            if(k == -1 || i < k-1) a[i] = i+1;
+            else a[i] = i+2;
+            vis[i] = false;
+        }
+
+        // printf
+        cout << "permutation: " << endl;
+        permutation(0, n, a);
+
+        cout << "combination dfs: " << endl;
+        //combination_dfs(0, 0, n, m, a, vis);
+
+        cout << "combination 0-1: " << endl;
+        //combination_01(a, n, m);
+
+        delete[] a;
+        delete[] vis;
+    }
+
+    return 0;
 }
 
-bool hasDone(bool* index, int n, int k)        // check if k-0 are all at right for 0-1 combination
+// define
+// permutation
+void permutation(int start, int end, int a[])
 {
-    for(int i = n-1; i >= n-k; i--){
-        if(!index[i]) return false;
+    if(start == end){
+        for(int i = 0; i < end; i++){
+            cout << a[i] << " ";
+        }
+        cout << endl;
+        return;
     }
-    return true;
+    //
+    int tmp = 0;
+    for(int i = start; i < end; i++){
+        // swap
+        tmp = a[start]; a[start] = a[i]; a[i] = tmp;
+        // next
+        permutation(start+1, end, a);
+        // swap
+        tmp = a[start]; a[start] = a[i]; a[i] = tmp;
+    }
 }
-void combination_01(int* a, int n, int k)      // combination using 0-1 methods
-{
-    bool* index = new bool[n];
-    // pre k = 1
-    for(int i = 0; i < k; i++){
-        index[i] = true;
-    }
-    for(int i = k; i < n; i++){
-        index[i] = false;
-    }
-    printRes(a, index, n);
 
-    // until all 0 are at left
-    while(!hasDone(index, n, k)){
-        // left --> right
+// combination dfs
+void combination_dfs(int pos, int cnt, int n, int m, int a[], bool vis[])
+{
+    // cnt = k
+    if(cnt == m){
+        for(int i = 0; i < n; i++){
+            if(vis[i]) cout << a[i] << " ";
+        }
+        cout << endl;
+        return;
+    }
+
+    // pos = n
+    if(pos == n) return;
+
+    // 
+    if(!vis[pos]){
+        vis[pos] = true;
+        // next k
+        combination_dfs(pos+1, cnt+1, n, m, a, vis);
+        // back_track
+        vis[pos] = false;
+    }
+    
+    // next n
+    combination_dfs(pos+1, cnt, n, m, a, vis);
+}
+
+// combination_01
+void combination_01(int* a, int n, int m)
+{
+    // pre vis
+    bool* vis = new bool[n];
+    // 
+    for(int i = 0; i < m; i++){
+        vis[i] = true;
+    }
+    for(int i = m; i < n; i++){
+        vis[i] = false;
+    }
+
+    printRes(a, vis, n);
+
+    // do until all 1s are at right
+    while(!hasDone(vis, n, m))
+    {
         for(int i = 0; i < n-1; i++){
-            // 10 --> 01
-            if(index[i] && !index[i+1]){
-                index[i] = false;
-                index[i+1] = true;
+            if(vis[i] && !vis[i+1]){
+                vis[i] = false;
+                vis[i+1] = true;
 
-                // 1s before 10 --> 01
-                int cnt = 0;
+                // 1s before 10 -> 01
+                int cnt = -1;
                 for(int j = 0; j < i; j++){
-                    if(index[j]){
-                        index[j] = false;
-                        index[cnt++] = true;
+                    if(vis[j]){
+                        vis[j] = false;
+                        vis[++cnt] = true;
                     }
                 }
-                // print
-                printRes(a, index, n);
+
+                printRes(a, vis, n);
                 break;
             }
         }
     }
 
-    delete[] index;
-}
-// Combination
-void getCnk_01(int n, int k, int e)
-{
-    // pre
-    int *a = new int[n];
-    // a
-    for(int i = 0; i < n; i++){
-        if(e == -1) a[i] = i+1;
-        else if(i < e-1) a[i] = i+1;
-        else a[i] = i+2;
-    }
-    //
-    combination_01(a, n, k);
-    delete[] a;
-
-    return;
-}
-
-
-// combination recursion
-// dfs
-void dfs(int pos, int cnt, int n, int k, int a[], bool vis[])
-{
-    if(cnt == k){
-        for(int i = 0; i < n; i++){
-            if(vis[i]) cout << a[i] <<' ';
-        }
-        cout << endl;
-        // int cur = getF();
-        // if(cur > maxF) maxF = cur;
-        // re
-        // for(int i = 0; i < n; i++){
-        //     if(vis[i]) changeCol(a[i]-1);
-        // }
-        // cout << endl;
-        return;
-    }
-    //
-    if(pos == n) return;
-    // vis
-    if(!vis[pos]){
-        vis[pos] = true;
-        dfs(pos+1, cnt+1, n, k, a, vis);
-        // back_track
-        vis[pos] = false;
-    }
-    dfs(pos+1, cnt, n, k, a, vis);
-}
-// Combination
-void getCnk(int n, int k, int e)
-{
-    // pre
-    int *a = new int[n];
-    bool *vis = new bool[n];
-    // a
-    for(int i = 0; i < n; i++){
-        if(e == -1) a[i] = i+1;
-        else if(i < e-1) a[i] = i+1;
-        else a[i] = i+2;
-        vis[i] = false;
-    }
-    //
-    dfs(0, 0, n, k, a, vis);
-    delete[] a;
     delete[] vis;
+}
+
+void printRes(int* a, bool* vis, int n)
+{
+    for(int i = 0; i < n; i++){
+        if(vis[i]) cout << a[i] << " ";
+    }
+    cout << endl;
     return;
 }
 
-
-
-int main()
+bool hasDone(bool* vis, int n, int m)
 {
-    int n, k, e;
-    while(cin >> n >> k >> e)
-    {
-        cout << "new-------" << endl;
-        getCnk(n, k, e);
-        cout << "01--------" << endl;
-        getCnk_01(n, k, e);
+    for(int i = n-1; i >= n-m; i--){
+        if(!vis[i]) return false;
     }
-    return 0;
+    return true;
 }
